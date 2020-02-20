@@ -10,23 +10,30 @@ import ToDo from './ToDo';
 
 function ToDoList(props) 
 {
-    return (
-        <Paper>
-            <List>
-                {props.todos.map( todoItem => (
-                    <>
-                    <ToDo task ={todoItem.task} 
-                      key={todoItem.id} 
-                      completed={todoItem.completed} 
-                      deleteClicked ={props.deleteClicked} 
-                      editFormSubmit = {props.editFormSubmit}
-                      checked={props.checked}/>
-                    <Divider/>
-                    </>
-                ))}
-            </List>
-        </Paper> 
-    )
+    if (props.todos.length > 0)
+    {
+        return (
+            <Paper>
+                <List>
+                    {props.todos.map( todoItem => (
+                        <>
+                        <ToDo task ={todoItem.task} 
+                          key={todoItem.id} 
+                          completed={todoItem.completed} 
+                          deleteClicked ={props.deleteClicked} 
+                          editFormSubmit = {props.editFormSubmit}
+                          checked={props.checked}/>
+                        <Divider/>
+                        </>
+                    ))}
+                </List>
+            </Paper> 
+        )
+    }
+    else 
+    {
+        return null;
+    }
 }
 
 export default ToDoList;

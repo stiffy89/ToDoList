@@ -15,13 +15,19 @@ import ToDoForm from './ToDoForm';
 
 function ToDoApp() {
 
-    const initialToDo = [
+    const initialToDo = JSON.parse(window.localStorage.getItem("todos") || "[]");
+
+    /*const initialToDo = [
         {id: 0, task: "clean room", completed: false},
         {id: 1, task: "clean car", completed: false},
         {id: 2, task: "clean dog", completed: false}
-    ];
+    ];*/
 
     const [todos, setTodos] = useState(initialToDo);
+
+    useEffect(() => {
+        window.localStorage.setItem("todos", JSON.stringify(todos));
+    }, [todos]);
 
     const addNewItemToDoList = (newToDoItem) => {
 
