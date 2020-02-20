@@ -19,6 +19,7 @@ function ToDoList(props)
                       key={todoItem.id} 
                       completed={todoItem.completed} 
                       deleteClicked ={props.deleteClicked} 
+                      editFormSubmit = {props.editFormSubmit}
                       checked={props.checked}/>
                     <Divider/>
                     </>

@@ -51,6 +51,22 @@ function ToDoApp() {
 
     }
 
+    const editFormSubmit = (newValue, previousValue) => {
+        
+        todos.map(task => {
+            if (task.task === previousValue)
+            {
+                task.task = newValue;
+            };
+        });
+
+        let newArray = todos;
+
+        console.log(...newArray);
+
+        setTodos([...newArray]);
+    }
+
     return (
         <Paper style={{
             padding: 0,
@@ -73,6 +89,7 @@ function ToDoApp() {
                         todos={todos} 
                         deleteClicked = {deleteButtonClicked}
                         checked={updateChecked}
+                        editFormSubmit = {editFormSubmit}
                         />
                 </Grid>
             </Grid>

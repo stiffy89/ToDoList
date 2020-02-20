@@ -35,11 +35,12 @@ const ToDo = (props) => {
     //pass through this to see whether
     //if we render a textfield or a to do
     const editObject = (props) => {
+
         if (editStatus)
         {
             return (
                 <ListItem>
-                    <EditForm placeHolder = {props.task}/>
+                    <EditForm editItem = {props} editFormSubmit = {props.editFormSubmit} editFormToggle = {editToDo}  />
                 </ListItem>
             )
         }
