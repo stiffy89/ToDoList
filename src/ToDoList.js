@@ -10,6 +10,8 @@ import ToDo from './ToDo';
 
 function ToDoList(props) 
 {
+    console.log(props);
+
     if (props.todos.length > 0)
     {
         return (

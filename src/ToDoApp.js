@@ -11,67 +11,19 @@ import {
 
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
+import useTodoState from './Hooks/useTodoState';
 
 
 function ToDoApp() {
 
-    const initialToDo = JSON.parse(window.localStorage.getItem("todos") || "[]");
+    const initialToDo = [{id: 0, task: "Pet a dog", completed: false}];
 
+    const {todos, deleteButtonClicked, updateChecked, editFormSubmit, addNewItemToDoList} = useTodoState(initialToDo);
     /*const initialToDo = [
         {id: 0, task: "clean room", completed: false},
         {id: 1, task: "clean car", completed: false},
         {id: 2, task: "clean dog", completed: false}
     ];*/
-
-    const [todos, setTodos] = useState(initialToDo);
-
-    useEffect(() => {
-        window.localStorage.setItem("todos", JSON.stringify(todos));
-    }, [todos]);
-
-    const addNewItemToDoList = (newToDoItem) => {
-
-        setTodos([...todos, {id: initialToDo.length + 1, task: newToDoItem, completed: false}]);
-
-    };
-
-    const deleteButtonClicked = (removeTask) => {
-
-        let newArrayResult = todos.filter(obj => obj.task !== removeTask);
-
-        setTodos([...newArrayResult]);
-    }
-
-    const updateChecked = (checkedTask) => {
-        
-        todos.map(task => {
-            if (task.task === checkedTask)
-            {
-                task.completed = !task.completed;
-            };
-        });
-
-        let newArray = todos;
-
-        setTodos([...newArray]);
-
-    }
-
-    const editFormSubmit = (newValue, previousValue) => {
-        
-        todos.map(task => {
-            if (task.task === previousValue)
-            {
-                task.task = newValue;
-            };
-        });
-
-        let newArray = todos;
-
-        console.log(...newArray);
-
-        setTodos([...newArray]);
-    }
 
     return (
         <Paper style={{
@@ -99,9 +51,6 @@ function ToDoApp() {
                         />
                 </Grid>
             </Grid>
-
-            
-
         </Paper>
     )
 }
