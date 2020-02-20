@@ -12,6 +12,7 @@ import {
 import ToDoList from './ToDoList';
 import ToDoForm from './ToDoForm';
 
+
 function ToDoApp() {
 
     const initialToDo = [
@@ -68,7 +69,11 @@ function ToDoApp() {
             <Grid container justify = "center" style={{marginTop: "10px"}}>
                 <Grid item xs={11} md= {8} lg={4}>
                     <ToDoForm addNewItem = {addNewItemToDoList}/>
-                    <ToDoList todos={todos} clicked = {deleteButtonClicked} checked={updateChecked}/>
+                    <ToDoList 
+                        todos={todos} 
+                        deleteClicked = {deleteButtonClicked}
+                        checked={updateChecked}
+                        />
                 </Grid>
             </Grid>
 

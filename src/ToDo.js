@@ -16,37 +16,66 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import useToggleState from './Hooks/useToggleState';
 
+import EditForm from './editForm';
+
 
 const ToDo = (props) => {
 
     const [toggleVal, setToggleVal] = useToggleState(false);
+    const [editStatus, setEditStatus] = useToggleState(false);
 
     const toDoOnClick = () => {
         setToggleVal(!toggleVal);
-        console.log(toggleVal);
     }
 
+    const editToDo = () => {
+        setEditStatus(!editStatus);
+    }
+
+    //pass through this to see whether
+    //if we render a textfield or a to do
+    const editObject = (props) => {
+        if (editStatus)
+        {
+            return (
+                <ListItem>
+                    <EditForm placeHolder = {props.task}/>
+                </ListItem>
+            )
+        }
+        else 
+        {
+            return (
+                <ListItem>
+                    <Checkbox tabIndex={-1}  checked = {props.completed} onClick={() => {props.checked(props.task); toDoOnClick();}}/>
+                    <ListItemText style = {{
+                        textDecoration: props.completed ? "line-through" : "none"
+                    }}>
+                        
+                        {props.task}
+        
+                    </ListItemText>
+                        
+                    <ListItemSecondaryAction>
+                        <IconButton aria-label="Edit">
+                            <EditIcon onClick = {() => editToDo()}/>
+                        </IconButton>
+
+                        <IconButton aria-label="Delete">
+                            <DeleteIcon onClick = {() => props.deleteClicked(props.task)}/>
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+            )
+        }
+    }
+
+
+
     return (
-        <ListItem>
-            <Checkbox tabIndex={-1}  checked = {props.completed} onClick={() => {props.checked(props.task); toDoOnClick();}}/>
-            <ListItemText style = {{
-                textDecoration: props.completed ? "line-through" : "none"
-            }}>
-                
-                {props.task}
-
-            </ListItemText>
-                
-                <ListItemSecondaryAction>
-                    <IconButton aria-label="Edit">
-                        <EditIcon/>
-                    </IconButton>
-
-                    <IconButton aria-label="Delete">
-                        <DeleteIcon onClick = {() => props.clicked(props.task)}/>
-                    </IconButton>
-                </ListItemSecondaryAction>
-        </ListItem>
+        <>
+        {editObject(props)}
+        </>
     )
 
 }
